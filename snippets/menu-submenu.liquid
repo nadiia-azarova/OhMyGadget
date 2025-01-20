@@ -1,0 +1,15 @@
+
+{% assign ul_class = class |  append: '__list' %}
+{% assign li_class = class |  append: '__item' %}
+{% assign a_class = class |  append: '__link' %}
+
+<ul class="{{ ul_class }}">
+{% for link in collection %}
+    <li class="{{ li_class }}">
+        {% render 'menu-link', link: link, class: a_class %}
+        {% if link.links != blank %}
+            {% render 'menu-submenu', collection: link.links, class: class %}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>

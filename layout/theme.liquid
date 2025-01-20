@@ -12,9 +12,12 @@
     {{ 'application.css' | asset_url | stylesheet_tag }}
     {{ 'application.js' | asset_url | script_tag }}
   </head>
-  <body>
-    <main role="main">
+  <body class="page">
+    {% section 'header' %}
+    <main role="main" class="page__main main">
       {{ content_for_layout }}
     </main>
+    {% section 'footer' %}
+    {{ 'menu.js' | asset_url | script_tag }}
   </body>
 </html>

@@ -1,0 +1,183 @@
+<!-- Add message -->
+{% if section.settings.isAdBar %}
+    <div class="header__add-bar add-bar">
+        {% render 'slogan' %}
+        {% render 'slogan' %}
+    </div>
+{% endif %}
+<div class="header__menu-bar menu-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div class="top-menu">
+                    <!-- Get in touch -->
+                    <ul class="top-menu__contacts contacts">
+                        <li class="contacts__item">Get in touch</li>
+                        <li class="contacts__item">
+                            {% render 'contact-phone', class: 'contacts' %}
+                        </li>
+                        <li class="contacts__item">
+                            {% render 'contact-time' %}
+                        </li>
+                    </ul>
+                    <!-- Main menu -->
+                    <nav class="top-menu__main-menu main-menu">
+                        <!-- Open mobile menu button -->
+                        <div id="mainMenuOpen" class="main-menu__icon menu-icon">
+                            {% render 'icon-menu-burger' %} 
+                        </div>
+                        <!-- Main menu links -->
+                        {% render 'menu-submenu', collection: linklists.main-menu.links, class: 'main-menu' %}
+                        <div class="main-menu__menu-mobile">
+                            <!-- Main menu mobile-->
+                            <div class=" menu-mobile">
+                                <div class="menu-mobile__title">
+                                    <!-- Store logo -->
+                                    <div class="menu-mobile__logo">
+                                        {% render 'logo-txt' %}
+                                    </div>
+                                    <!-- Close mobile menu button -->
+                                    <div id="mainMenuClose" class="menu-mobile__icon-close">
+                                            {% render 'icon-menu-close' %}
+                                    </div>
+                                </div>
+                                <!-- Catalog button  -->
+                                <div id="catBtn" class="menu-mobile__btn btn">
+                                    Catalog
+                                </div>
+                                <!-- Main menu links -->
+                                {% render 'menu-submenu', collection: linklists.main-menu.links, class: 'menu-mobile' %}
+                                <!-- Get in touch -->
+                                <ul class="menu-mobile__contact mobile-contact">
+                                    <li class="mobile-contact__item">
+                                        {% render 'contact-phone', class: "mobile-contact" %}
+                                    </li>
+                                    <li class="mobile-contact__item">
+                                        {% render 'contact-time' %}
+                                    </li>
+                                    </ul>
+                                <!-- Social media links snippet -->
+                                <div class="menu-mobile__socials">
+                                    {% render 'social-links' %}
+                                </div>
+                            </div> 
+                            <!-- Mobile menu background -->
+                            {% render 'menu-mobile-background', class: 'main-menu' %}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-md-3 col-sm-8">
+                <!-- Social media links -->
+                <div class="socials-header">
+                    {% render 'social-links' %}
+                </div>
+            </div>
+            <div class="col-4 col-md-2 col-sm-8">
+                <!-- Logo top -->
+                <div class="logo-top">
+                    <a href="{{ routes.root_url }}" class="logo-top__link">
+                        <img src="{{ shop.brand.logo | image_url: width: 247 }}" alt="{{ shop.brand.logo.alt }} | " class="logo-top__img">
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-sm-8">
+                <!-- Customer menu -->
+                <ul class="customer-menu">
+                    <li class="customer-menu__item">
+                        <a href="#" class="customer-menu__link">
+                            {% render 'icon-search' %}
+                        </a>
+                    </li>
+                    <li class="customer-menu__item">
+                        <a href="
+                            {% if customer %}
+                                {{ routes.account_url }}
+                            {%  else %}
+                                {{ routes.account_login_url }} 
+                            {% endif %}
+                        " class="customer-menu__link">
+                            {% render 'icon-user' %}
+                            <div class="customer-menu__txt">Login</div>
+                        </a>
+                    </li>
+                    <li class="customer-menu__item">
+                        <a href="{{ routes.cart_url }}" class="customer-menu__link">
+                            {% render 'icon-cart' %}
+                            <div class="customer-menu__txt customer-menu__txt_counter">({{ cart.item_count }})</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Catalog Menu -->
+<div class="header__catalog-menu catalog-menu">
+    <div class="container">
+        <div id="catalogMenuOpen" class="catalog-menu__burger">
+            {% render 'icon-robot-head' %}
+            Catalog
+        </div>
+        {% render 'menu-submenu', collection: linklists.catalog-menu.links, class: 'catalog-menu' %}
+    </div>
+    <div class="catalog-menu__menu-mobile">
+        <div class="menu-mobile">
+            <div class="menu-mobile__title">
+                <!-- Catalog title -->
+                <div class="menu-mobile__txt">
+                    Catalog
+                </div>
+                <!-- Close mobile menu button -->
+                <div id="catalogMenuClose" class="menu-mobile__icon-close">
+                    {% render 'icon-menu-close' %}
+                </div>
+            </div>
+                <!-- Menu links -->
+            {% render 'menu-submenu', collection: linklists.catalog-menu.links, class: 'menu-mobile' %}
+            </div>
+        </div>
+        <!-- Mobile menu background -->
+        {% render 'menu-mobile-background', class: 'main-menu' %}
+    </div>
+</div>
+<div class="header__bread-crumbs bread-crumbs">
+    <div class="container"></div>
+</div>
+
+{% schema %}
+{
+    "name": "Header",
+    "tag": "header",
+    "class": "page__header header",
+    "limit": 1,
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "isAdBar",
+            "label": "Show Add Bar",
+            "info": "Advertisement on the top of the page",
+            "default": true
+        },
+        {
+            "type": "radio",
+            "options": [
+                {
+                    "value": "slogan",
+                    "label": "Slogans - running line"
+                },
+                {
+                    "value": "advertising",
+                    "label": "Advertising message"
+                }
+            ],
+            "id": "isRunningLine",
+            "default": "slogan",
+            "label": "What to show",
+            "info": "What to be shown in the advertising bar"
+        }
+    ]
+}
+{% endschema %}

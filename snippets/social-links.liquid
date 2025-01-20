@@ -1,0 +1,30 @@
+<ul class="socials">
+    {% for link in shop.brand.metafields.social_links %}
+        <li class="socials__item">
+            <a href="{{ link[1] }}" class="socials__link">
+                {% case link[0] %}
+                    {% when 'facebook' %}
+                        {% render 'icon-social-facebook' %}
+                    {% when 'pinterest' %}
+                        {% render 'icon-social-pinterest' %}
+                    {% when 'instagram' %}
+                        {% render 'icon-social-instagram' %}
+                    {% when 'linkedin' %}
+                        {% render 'icon-social-linkedin' %}
+                    {% when 'tiktok' %}
+                        {% render 'icon-social-tiktok' %}
+                    {% when 'youtube' %}
+                        {% render 'icon-social-youtube' %}
+                    {% when 'twitter' %}
+                        {% render 'icon-social-xtwitter' %}
+                    {% when 'tumblr' %}
+                        {% render 'icon-social-tumblr' %}
+                    {% when 'snapchat' %}
+                        {% render 'icon-social-snapchat' %}
+                    {% when 'vimeo' %}
+                        {% render 'icon-social-vimeo' %}
+                {% endcase %}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
