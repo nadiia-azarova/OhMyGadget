@@ -1,0 +1,11 @@
+{% assign plus_class =  class |  append: '-plus' %}
+{% assign minus_class =  class |  append: '-minus' %}
+<a
+    href="{{ link.url }}" class="{{ class }} {% if link.active %}{{ class |  append: '_active' }}{% endif %}"
+>
+    {{ link.title }}
+    {% if link.levels > 0 %} 
+        {% render 'icon-plus', class: plus_class %} 
+        {% render 'icon-minus', class: minus_class %} 
+    {% endif %}
+</a>
