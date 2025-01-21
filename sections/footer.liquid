@@ -1,32 +1,48 @@
-<footer class="page__footer footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-8">
-                <div class="footer-logo">
-                    {% render 'logo-txt' %}
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="footer-logo">
+                {% render 'logo-txt' %}
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-8">
-                <ul class="footer-menu">
-                    {% for link in linklists.footer.links %}
-                        <li class="footer-menu__item">
-                            <a href="{{ link.url }}" class="footer-menu__link {% if link.active %}main-menu__link_active{% endif %}">{{ link.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8">
-                <div class="footer-info">
-                    <div class="footer-info__item copyright">
-                        © 2024 OhMyGadget
-                    </div>
-                    {% render 'payment-systems' %}
-                </div>
-            </div>
-        </div> 
     </div>
-</footer>
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <ul class="footer-menu">
+                {% for link in linklists.footer.links %}
+                    <li class="footer-menu__item">
+                        <a href="{{ link.url }}" class="footer-menu__link {% if link.active %}main-menu__link_active{% endif %}">{{ link.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="footer-info">
+                <div class="footer-info__item copyright">
+                    {{ section.settings.copyrightTxt }}
+                </div>
+                {% render 'payment-systems' %}
+            </div>
+        </div>
+    </div> 
+</div>
+
+{% schema %}
+{
+    "name": "Footer",
+    "tag": "footer",
+    "class": "page__footer footer",
+    "limit": 1,
+    "settings": [
+        {
+            "type": "text",
+            "id": "copyrightTxt",
+            "label": "Copyright text",
+            "info": "What to be written in the copiright section",
+            "default": "© 2024 OhMyGadget"
+        }
+    ]
+}
+{% endschema %}
