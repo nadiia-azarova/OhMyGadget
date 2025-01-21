@@ -1,8 +1,16 @@
 <!-- Add message -->
 {% if section.settings.isAdBar %}
     <div class="header__add-bar add-bar">
-        {% render 'slogan' %}
-        {% render 'slogan' %}
+        {% if section.settings.isRunningLine == 'slogan' %}
+            {% render 'slogan' %}
+            {% render 'slogan' %}
+        {% else %}
+        <div class="container">
+            <p class="add-bar__txt">
+                {{ section.settings.adMessage }}
+            </p>
+        </div>
+        {% endif %}
     </div>
 {% endif %}
 <div class="header__menu-bar menu-bar">
@@ -11,15 +19,27 @@
             <div class="col-12 col-md-8">
                 <div class="top-menu">
                     <!-- Get in touch -->
-                    <ul class="top-menu__contacts contacts">
-                        <li class="contacts__item">Get in touch</li>
-                        <li class="contacts__item">
-                            {% render 'contact-phone', class: 'contacts' %}
-                        </li>
-                        <li class="contacts__item">
-                            {% render 'contact-time' %}
-                        </li>
-                    </ul>
+                    {% assign contact_phone = section.settings.phoneNumber %}
+                    {% assign contact_time = section.settings.workTime %}
+                    {% assign contact_email = section.settings.contactEmail %}
+                        <ul class="top-menu__contacts contacts">
+                            <li class="contacts__item">Get in touch:</li>
+                            {% if contact_phone != blank %}
+                               <li class="contacts__item">
+                                    {% render 'contact-phone', class: 'contacts', phone_number: contact_phone %}
+                                </li> 
+                            {% endif %}
+                            {% if contact_time != blank %}
+                               <li class="contacts__item">
+                                    {% render 'contact-time', work_time: contact_time %}
+                                </li> 
+                            {% endif %}
+                            {% if contact_email != blank %}
+                                <li class="contacts__item">
+                                    {% render 'contact-email', class: 'contacts', email: contact_email %}
+                                </li> 
+                            {% endif %}
+                        </ul>
                     <!-- Main menu -->
                     <nav class="top-menu__main-menu main-menu">
                         <!-- Open mobile menu button -->
@@ -177,6 +197,35 @@
             "default": "slogan",
             "label": "What to show",
             "info": "What to be shown in the advertising bar"
+        },
+        {
+            "type": "text",
+            "id": "adMessage",
+            "label": "Advertising Message",
+            "placeholder": "Write your advertising message here",
+            "info": "Advertising message to show instead of the running line of slogans"
+        },
+        {
+            "type": "text",
+            "id": "phoneNumber",
+            "label": "Phone Number",
+            "info": "Phone Number for clients to get in touch in the following format: +44 117 2345678",
+            "placeholder": "+44 117 2345678"
+        },
+        {
+            "type": "text",
+            "id": "workTime",
+            "label": "Woking hours",
+            "info": "Working hours and working days",
+            "placeholder": "8am – 8pm, 7 Days A Week",
+            "default": "8am – 8pm, 7 Days A Week"
+        },
+        {
+            "type": "text",
+            "id": "contactEmail",
+            "label": "Email",
+            "info": "Email for clients to get in touch. Please use either is or the phone",
+            "placeholder": "hello@omg.shop"
         }
     ]
 }

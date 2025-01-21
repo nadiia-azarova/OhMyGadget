@@ -1,0 +1,6 @@
+{% assign link_class = class |  append: '__link' %}
+
+<a href="email:{{ email }}" class="{{ link_class }}">
+    {% render 'icon-email' %}
+    <p>{{ email }}</p>
+</a>
